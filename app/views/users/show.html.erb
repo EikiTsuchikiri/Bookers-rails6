@@ -9,6 +9,53 @@
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
       <%= render 'books/index',books: @books %>
+      <h2>投稿数の前日比・先週比</h2>
+      <div class="col-10">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th style="width: 30%">今日の投稿数</th>
+              <th style="width: 30%">昨日の投稿数</th>
+              <th style="width: 40%">前日比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @books.created_today.count %></td>
+              <td><%= @books.created_yesterday.count %></td>
+              <% if @books.created_yesterday.count == 0 %>
+                <td>前日の投稿はなし</td>
+              <% else %>
+                <td>
+                  <%= (@books.created_today.count / @books.created_yesterday.count.to_f * 100).round %> %
+                </td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th style="width: 30%">今週の投稿数</th>
+              <th style="width: 30%">先週の投稿数</th>
+              <th style="width: 40%">先週比</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><%= @books.created_this_week.count %></td>
+            <td><%= @books.created_last_week.count %></td>
+            <% if @books.created_last_week.count == 0 %>
+              <td>先週の投稿はなし</td>
+            <% else %>
+              <td>
+                <%= (@books.created_this_week.count / @books.created_last_week.count.to_f * 100).round %> %
+              </td>
+            <% end %>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
