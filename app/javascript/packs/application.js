@@ -11,6 +11,9 @@ import "jquery"
 import "popper.js"
 import "bootstrap"
 
+window.$ = window.jQuery = require('jquery'); 
+require('packs/raty')
+
 import '@fortawesome/fontawesome-free/js/all';
 import "../stylesheets/application" 
 
