@@ -17,6 +17,11 @@
           </td>
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
+          <td>
+            <% @book.tags.each do |tag| %>
+              <%= link_to tag.name, search_path(model: "tag", content: tag.name) %>
+            <% end %>
+          </td>
           <td class=<%= "favorite-" + @book.id.to_s %> >
             <%= render "favorites/btn", book: @book %>
           </td>
